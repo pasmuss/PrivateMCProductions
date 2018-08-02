@@ -92,6 +92,9 @@ process.configurationMetadata = cms.untracked.PSet(
     version = cms.untracked.string('$Revision: 1.19 $')
 )
 
+from Configuration.AlCa.GlobalTag import GlobalTag
+process.GlobalTag = GlobalTag(process.GlobalTag,options.GlobalTag,'')
+
 # Output definition
 outrootfile='file:step1_UndergroundCosmicSPLooseMu_'+str(process.GlobalTag.globaltag.value())+"_"+str(options.maxEvents)+'_evts_seed_'+str(options.myseed)+'.root'
 print 'output file name:', outrootfile
@@ -131,8 +134,6 @@ process.ALCARECOStreamTkAlCosmics0T = cms.OutputModule("PoolOutputModule",
 process.genstepfilter.triggerConditions=cms.vstring("generation_step")
 process.mix.digitizers = cms.PSet(process.theDigitizersValid)
 process.ALCARECOEventContent.outputCommands.extend(process.OutALCARECOTkAlCosmics0T_noDrop.outputCommands)
-from Configuration.AlCa.GlobalTag import GlobalTag
-process.GlobalTag = GlobalTag(process.GlobalTag,options.GlobalTag,'')
 
 process.cosmicInTracker = cms.EDFilter("CosmicGenFilterHelix",
     charges = cms.vint32(1, -1),
