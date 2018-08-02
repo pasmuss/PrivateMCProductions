@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CMSSW_DIR=${CMSSW_BASE}/src/
+CMSSW_DIR=${CMSSW_BASE}/src/PrivateMCProductions/TkAlCosmics0T
 cd $CMSSW_DIR
 
 for i in {0..250}; do   
