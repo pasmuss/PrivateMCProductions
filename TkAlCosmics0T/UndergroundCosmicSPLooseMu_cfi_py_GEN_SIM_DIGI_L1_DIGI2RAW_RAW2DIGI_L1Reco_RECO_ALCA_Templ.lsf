@@ -7,7 +7,7 @@ JobName=step1_UndergroundCosmicSPLooseMu_${nEvts}_evts_seed_$mySeed
 
 echo  "Job started at " `date`
 
-CMSSW_DIR=${CMSSW_BASE}/src
+CMSSW_DIR=${CMSSW_BASE}/src/PrivateMCProductions/TkAlCosmics0T
 LXBATCH_DIR=$PWD
 
 cd ${CMSSW_BASE}/src
