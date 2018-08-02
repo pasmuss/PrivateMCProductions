@@ -4,6 +4,7 @@
 # Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v 
 # with command line options: UndergroundCosmicSPLooseMu_cfi.py --conditions auto:phase1_2018_cosmics -s GEN,SIM,DIGI:pdigi_valid,L1,DIGI2RAW,RAW2DIGI,L1Reco,RECO,ALCA:TkAlCosmics0T -n 10 --era Run2_2018 --eventcontent ALCARECO --scenario cosmics --datatier ALCARECO --beamspot Realistic25ns13TeVEarly2018Collision --no_exec
 import FWCore.ParameterSet.Config as cms
+import FWCore.ParameterSet.VarParsing as VarParsing
 
 from Configuration.StandardSequences.Eras import eras
 
