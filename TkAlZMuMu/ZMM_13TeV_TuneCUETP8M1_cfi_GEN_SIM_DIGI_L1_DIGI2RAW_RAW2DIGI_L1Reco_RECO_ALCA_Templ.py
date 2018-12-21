@@ -39,7 +39,7 @@ options.register('maxEvents',
 		 "Number of events to process (-1 for all)")
 
 options.register ('GlobalTag',
-                  'auto:phase1_2018_cosmics',
+                  'auto:phase1_2018_realistic',
                   VarParsing.VarParsing.multiplicity.singleton, # singleton or list
                   VarParsing.VarParsing.varType.string,          # string, int, or float
 		  "Global Tag to select")
@@ -109,7 +109,7 @@ process.configurationMetadata = cms.untracked.PSet(
 )
 
 from Configuration.AlCa.GlobalTag import GlobalTag
-process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:phase1_2018_realistic', '')
+process.GlobalTag = GlobalTag(process.GlobalTag,options.GlobalTag, '')
 
 # Output definition
 outrootfile='file:step1_ZMM_13TeV_TuneCUETP8M1_'+str(process.GlobalTag.globaltag.value())+"_"+str(options.maxEvents)+'_evts_seed_'+str(options.myseed)+'.root'
