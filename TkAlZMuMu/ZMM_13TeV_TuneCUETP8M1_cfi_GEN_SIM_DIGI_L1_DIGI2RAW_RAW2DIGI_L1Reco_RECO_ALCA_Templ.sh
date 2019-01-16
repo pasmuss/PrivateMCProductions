@@ -7,10 +7,10 @@ JobName=step1_ZMM_13TeV_TuneCUETP8M1_${nEvts}_evts_seed_$mySeed
 
 echo  "Job started at " `date`
 
-CMSSW_DIR=${CMSSW_BASE}/src/PrivateMCProductions/TkAlZMuMu
+CMSSW_DIR=$4
 LXBATCH_DIR=$PWD
 
-cd ${CMSSW_BASE}/src
+cd ${CMSSW_DIR}
 eval `scramv1 runtime -sh`
 cd $LXBATCH_DIR
 
@@ -25,9 +25,9 @@ eos mkdir -p /eos/cms/store/group/alca_trackeralign/$USER/test_out/ZMuMu2018MCPr
 
 for payloadOutput in $(ls *root ); do xrdcp -f $payloadOutput root://eoscms.cern.ch//eos/cms/store/group/alca_trackeralign/$USER/test_out/ZMuMu2018MCProd/step1_ZMM_13TeV_TuneCUETP8M1_${globalTag}_${nEvts}_evts_seed_${mySeed}.root ; done
 
-#xrdcp -f step1_ZMM_13TeV_TuneCUETP8M1_${globalTag}_${nEvts}_evts_seed_${mySeed}.root root://eoscms.cern.ch//eos/cms/store/group/alca_trackeralign/musich/test_out/Cosmics2018MCProd/step1_ZMM_13TeV_TuneCUETP8M1_${globalTag}_${nEvts}_evts_seed_${mySeed}.root
-
-cp ${JobName}.out ${CMSSW_DIR}/outfiles
+mv ${JobName}.out ${CMSSW_DIR}/outfiles
+mv ${JobName}.err ${CMSSW_DIR}/outfiles
+mv ${JobName}.log ${CMSSW_DIR}/outfiles
 
 echo  "Job ended at " `date`
 
