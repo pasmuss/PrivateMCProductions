@@ -40,32 +40,8 @@ print "my seed is: ", options.myseed
 process.load('Configuration.StandardSequences.Services_cff')
 process.load('SimGeneral.HepPDTESSource.pythiapdt_cfi')
 process.load('FWCore.MessageService.MessageLogger_cfi')
-###################################################################
-# Setup 'standard' options
-###################################################################
-options = VarParsing.VarParsing()
-
-options.register('myseed',
-                 1,
-                 VarParsing.VarParsing.multiplicity.singleton,
-                 VarParsing.VarParsing.varType.int,
-                 "my seed for the job (1 is default)")
-
-options.register('maxEvents',
-		  -1,
-		  VarParsing.VarParsing.multiplicity.singleton,
-		  VarParsing.VarParsing.varType.int,
-		  "Number of events to process (-1 for all)")
-
-options.register ('GlobalTag',
-                  'auto:phase1_2018_cosmics',
-                  VarParsing.VarParsing.multiplicity.singleton, # singleton or list
-                  VarParsing.VarParsing.varType.string,          # string, int, or float
-		    "Global Tag to select")
-
-options.parseArguments()
-
-print "my seed is: ", options.myseed
+process.MessageLogger.destinations = ['cout', 'cerr']
+process.MessageLogger.cerr.FwkReport.reportEvery = 10000
 process.load('Configuration.EventContent.EventContentCosmics_cff')
 process.load('SimGeneral.MixingModule.mixCosmics_cfi')
 process.load('Configuration.StandardSequences.GeometryRecoDB_cff')
@@ -105,9 +81,7 @@ process.source = cms.Source("EmptySource",
 			    firstLuminosityBlock = cms.untracked.uint32(options.myseed+1)
 			    )
 
-process.options = cms.untracked.PSet(
-
-)
+process.options = cms.untracked.PSet()
 
 # Production Info
 process.configurationMetadata = cms.untracked.PSet(
@@ -117,7 +91,7 @@ process.configurationMetadata = cms.untracked.PSet(
 )
 
 from Configuration.AlCa.GlobalTag import GlobalTag
-process.GlobalTag = GlobalTag(process.GlobalTag, '')
+process.GlobalTag = GlobalTag(process.GlobalTag,options.GlobalTag,'')
 
 # Output definition
 outrootfile='file:step1_UndergroundCosmicSPLooseMu_peak_0T_'+str(process.GlobalTag.globaltag.value())+"_"+str(options.maxEvents)+'_evts_seed_'+str(options.myseed)+'.root'
@@ -137,7 +111,7 @@ process.ALCARECOStreamTkAlCosmics0T = cms.OutputModule("PoolOutputModule",
         filterName = cms.untracked.string('TkAlCosmics0T')
     ),
     eventAutoFlushCompressedSize = cms.untracked.int32(5242880),
-    fileName = cms.untracked.string('TkAlCosmics0T.root'),
+    fileName = cms.untracked.string(outrootfile),
     outputCommands = cms.untracked.vstring(
         'drop *', 
         'keep *_ALCARECOTkAlCosmicsCTF0T_*_*', 

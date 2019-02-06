@@ -98,7 +98,7 @@ process.genstepfilter.triggerConditions=cms.vstring("generation_step")
 process.mix.digitizers = cms.PSet(process.theDigitizersValid)
 process.ALCARECOEventContent.outputCommands.extend(process.OutALCARECOTkAlCosmics0T_noDrop.outputCommands)
 from Configuration.AlCa.GlobalTag import GlobalTag
-process.GlobalTag = GlobalTag(process.GlobalTag, '')
+process.GlobalTag = GlobalTag(process.GlobalTag,options.GlobalTag,'')
 
 # Output definition
 outrootfile='file:step1_UndergroundCosmicSPLooseMu_deco_38T_'+str(process.GlobalTag.globaltag.value())+"_"+str(options.maxEvents)+'_evts_seed_'+str(options.myseed)+'.root'
@@ -118,7 +118,7 @@ process.ALCARECOStreamTkAlCosmics0T = cms.OutputModule("PoolOutputModule",
         filterName = cms.untracked.string('TkAlCosmics0T')
     ),
     eventAutoFlushCompressedSize = cms.untracked.int32(5242880),
-    fileName = cms.untracked.string('TkAlCosmics0T.root'),
+    fileName = cms.untracked.string(outrootfile),
     outputCommands = cms.untracked.vstring(
         'drop *', 
         'keep *_ALCARECOTkAlCosmicsCTF0T_*_*', 

@@ -9,5 +9,5 @@ else
     mkdir $CMSSW_DIR/outfiles
 fi
 
-condor_submit par1=100000 par2=103X_upgrade2018cosmics_realistic_deco_v7 submit.sub par3=${CMSSW_DIR}
+condor_submit par1=100000 par2=103X_upgrade2018cosmics_realistic_peak_v1 submit.sub par3=${CMSSW_DIR}
 
